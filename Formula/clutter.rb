@@ -20,6 +20,7 @@ class Clutter < Formula
   depends_on "cogl"
   depends_on "gdk-pixbuf"
   depends_on "glib"
+  depends_on "gtk+3" unless OS.mac?
   depends_on "json-glib"
   depends_on "pango"
 
@@ -34,9 +35,15 @@ class Clutter < Formula
       --disable-examples
       --disable-gtk-doc-html
       --enable-gdk-pixbuf=yes
-      --without-x --enable-x11-backend=no
-      --enable-quartz-backend=yes
     ]
+
+    if OS.mac?
+      args += %w[
+        --without-x
+        --enable-x11-backend=no
+        --enable-quartz-backend=yes
+      ]
+    end
 
     system "./configure", *args
     system "make", "install"
@@ -98,11 +105,11 @@ class Clutter < Formula
       -lglib-2.0
       -lgmodule-2.0
       -lgobject-2.0
-      -lintl
       -ljson-glib-1.0
       -lpango-1.0
       -lpangocairo-1.0
     ]
+    flags << "-lintl" if OS.mac?
     system ENV.cc, "test.c", "-o", "test", *flags
     system "./test"
   end
