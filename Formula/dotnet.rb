@@ -24,6 +24,11 @@ class Dotnet < Formula
   depends_on "icu4c"
   depends_on "openssl@1.1"
 
+  unless OS.mac?
+    depends_on "libunwind"
+    depends_on "lttng-ust"
+  end
+
   # libicu 68 deprecates its defined boolean constants for TRUE/FALSE
   # https://github.com/dotnet/runtime/issues/47346
   resource "runtime-libicu-68-patch" do
