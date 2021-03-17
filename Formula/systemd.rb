@@ -10,12 +10,13 @@ class Systemd < Formula
   depends_on "gettext" => :build
   depends_on "gperf" => :build
   depends_on "intltool" => :build
-  depends_on "libgpg-error" => :build
   depends_on "libtool" => :build
   depends_on "meson" => :build
   depends_on "ninja" => :build
   depends_on "pkg-config" => :build
   depends_on "libcap"
+  depends_on "libgcrypt"
+  depends_on "libgpg-error"
   depends_on :linux
   depends_on "lz4"
   depends_on "openssl@1.1"
