@@ -37,6 +37,8 @@ class Dotnet < Formula
   end
 
   def install
+    ENV.append "LD_LIBRARY_PATH", Formula["icu4c"].opt_lib unless OS.mac?
+
     (buildpath/"patches/runtime").install resource("runtime-libicu-68-patch")
 
     # Arguments needed to not artificially time-limit downloads from Azure.
